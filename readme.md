@@ -1,6 +1,6 @@
 # CodeView
 
-**CodeView** is an open-source tool designed to help you consolidate and analyze your codebase using large language models (LLMs). This utility is perfect for generating a comprehensive overview of your project, including file contents, structure, and line numbers, making it easier for LLMs to provide insightful analysis and assistance.
+**CodeView** is an open-source script designed to help you consolidate and analyze your codebase using large language models (LLMs). This utility is perfect for generating a comprehensive overview of your project, including file contents, structure, and line numbers, making it easier for LLMs to provide insightful analysis and assistance.
 
 ## Features
 
