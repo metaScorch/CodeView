@@ -4,11 +4,12 @@
 
 ## Features
 
-- **Directory Traversal**: Recursively explores your project directory, including only important files.
-- **Content Consolidation**: Aggregates file contents into a single document with metadata.
-- **Dynamic Line Number Tracking**: Ensures accurate line numbers for each file segment.
-- **Directory Tree Generation**: Creates a visual representation of the project structure.
-- **Performance Metrics**: Includes timing information for the analysis process.
+* **Directory Traversal**: Recursively explores your project directory, including only important files.
+* **Content Consolidation**: Aggregates file contents into a single document with metadata.
+* **Dynamic Line Number Tracking**: Ensures accurate line numbers for each file segment.
+* **Directory Tree Generation**: Creates a visual representation of the project structure.
+* **Performance Metrics**: Includes timing information for the analysis process.
+* **Directory Exclusion**: Dynamically exclude specific directories beyond the default ignored ones.
 
 ## Getting Started
 
@@ -20,35 +21,48 @@ Ensure you have Node.js installed on your system. You can download it from [Node
 
 Clone this repository to your local machine:
 
-```sh
-git clone https://github.com/your-username/CodeView.git
+```
+git clone https://github.com/CanParlayan/CodeView.git
 cd CodeView
 ```
 
-### Usage
+## Usage
 
 Run the `CodeView` script with the path to your project directory as an argument:
 
-```sh
+```
 node script.js /path/to/your/project
+```
+
+To exclude specific directories:
+
+```
+node script.js /path/to/your/project --exclude tests,docs
+```
+
+or using the short form:
+
+```
+node script.js /path/to/your/project -e tests,docs
 ```
 
 The output will be a `codebase_review.txt` file in the specified directory, containing a comprehensive overview of your project.
 
 ### Example
 
-```sh
+```
 node script.js /path/to/your/project
 ```
 
 This will generate a `codebase_review.txt` file with the following structure:
 
-```txt
+```
 Summary:
   - Directory: /path/to/your/project
   - Files processed: 21
   - Total lines: 872
   - Duration: 0.02 seconds
+  - Excluded directories: None
 
 ================================================================================
 
@@ -103,6 +117,12 @@ File: components.json (starts at line 80)
 }
 ```
 
+### Command Line Arguments
+
+| Argument | Alias | Description |
+|----------|-------|-------------|
+| `--exclude` | `-e` | Comma-separated list of directories to exclude from processing |
+
 ## Contributing
 
 Contributions are welcome! Please fork this repository and submit pull requests to improve the project.
@@ -116,7 +136,7 @@ Contributions are welcome! Please fork this repository and submit pull requests 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Acknowledgments
 
