@@ -1,7 +1,3 @@
-Here’s the updated `README.md` file with the newly added `--include` and `--include-file` flags, as well as other relevant changes:
-
----
-
 # CodeView
 
 **CodeView** is an open-source script designed to help you consolidate and analyze your codebase using large language models (LLMs). This utility is perfect for generating a comprehensive overview of your project, including file contents, structure, and line numbers, making it easier for LLMs to provide insightful analysis and assistance.
