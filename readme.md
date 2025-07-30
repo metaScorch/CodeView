@@ -9,6 +9,9 @@
 - **Dynamic Line Number Tracking**: Ensures accurate line numbers for each file segment.
 - **Directory Tree Generation**: Creates a visual representation of the project structure.
 - **Performance Metrics**: Includes timing information for the analysis process.
+- **Directory and File Exclusion**: Dynamically exclude specific directories or files beyond the default ignored ones.
+- **Directory and File Inclusion**: Optionally include only specific directories or files for processing.
+- **Minification**: Optionally minify the output by removing all whitespace (spaces, tabs, and newlines).
 
 ## Getting Started
 
@@ -20,88 +23,133 @@ Ensure you have Node.js installed on your system. You can download it from [Node
 
 Clone this repository to your local machine:
 
-```sh
-git clone https://github.com/your-username/CodeView.git
+```bash
+git clone https://github.com/CanParlayan/CodeView.git
 cd CodeView
 ```
 
-### Usage
+## Usage
 
 Run the `CodeView` script with the path to your project directory as an argument:
 
-```sh
+```bash
 node script.js /path/to/your/project
 ```
 
-The output will be a `codebase_review.txt` file in the specified directory, containing a comprehensive overview of your project.
+### Excluding Directories or Files
+
+To exclude specific directories or files:
+
+```bash
+node script.js /path/to/your/project --exclude tests,docs --exclude-file __init__.py,setup.py
+```
+
+or using the short form:
+
+```bash
+node script.js /path/to/your/project -e tests,docs -ef __init__.py,setup.py
+```
+
+### Including Specific Directories or Files
+
+To include only specific directories or files:
+
+```bash
+node script.js /path/to/your/project --include src,lib --include-file main.js,utils.js
+```
+
+or using the short form:
+
+```bash
+node script.js /path/to/your/project -i src,lib -if main.js,utils.js
+```
+
+### Minifying Output
+
+To minify the output (remove all whitespace):
+
+```bash
+node script.js /path/to/your/project --minify
+```
+
+or using the short form:
+
+```bash
+node script.js /path/to/your/project -m
+```
 
 ### Example
 
-```sh
-node script.js /path/to/your/project
+```bash
+node script.js /path/to/your/project --include src --include-file main.js --minify
 ```
 
-This will generate a `codebase_review.txt` file with the following structure:
+This will generate a `codebase_review.txt` file with the following structure (if not minified):
 
-```txt
+```
 Summary:
   - Directory: /path/to/your/project
   - Files processed: 21
   - Total lines: 872
   - Duration: 0.02 seconds
+  - Excluded directories: None
+  - Excluded files: None
+  - Included directories: src
+  - Included files: main.js
 
 ================================================================================
 
 Directory Structure:
 
-├── public/
-│   ├── index.html
-│   ├── manifest.json
-├── src/
-│   ├── components/
-│   │   └── ui/
-│   │       ├── alert.jsx
-│   │       ├── button.jsx
-│   │       ├── card.jsx
-│   │       ├── dialog.jsx
-│   │       └── input.jsx
-│   ├── lib/
-│   │   └── utils.js
-│   ├── App.css
-│   ├── App.js
-│   ├── App.test.js
-│   ├── index.css
-│   ├── index.js
-│   ├── reportWebVitals.js
-│   └── setupTests.js
-├── README.md
-├── components.json
-├── jsconfig.json
-├── package.json
-├── postcss.config.js
-└── tailwind.config.js
+src/
+├── components/
+│   └── ui/
+│       ├── alert.jsx
+│       ├── button.jsx
+│       ├── card.jsx
+│       ├── dialog.jsx
+│       └── input.jsx
+├── lib/
+│   └── utils.js
+├── App.css
+├── App.js
+├── App.test.js
+├── index.css
+├── index.js
+├── reportWebVitals.js
+└── setupTests.js
 
 Files extracted:
-README.md (starts at line 1)
-components.json (starts at line 80)
+src/main.js (starts at line 1)
+src/lib/utils.js (starts at line 80)
 ...
 
 ================================================================================
 
-File: README.md (starts at line 1)
+File: src/main.js (starts at line 1)
 
-# Getting Started with Create React App
+import React from 'react';
+import ReactDOM from 'react-dom';
 ...
 
 ================================================================================
 
-File: components.json (starts at line 80)
+File: src/lib/utils.js (starts at line 80)
 
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
+export function formatDate(date) {
   ...
 }
 ```
+
+### Command Line Arguments
+
+| Argument          | Alias | Description                                                                 |
+|-------------------|-------|-----------------------------------------------------------------------------|
+| `--exclude`       | `-e`  | Comma-separated list of directories to exclude from processing              |
+| `--exclude-file`  | `-ef` | Comma-separated list of files to exclude from processing                    |
+| `--include`       | `-i`  | Comma-separated list of directories to include (only these will be processed) |
+| `--include-file`  | `-if` | Comma-separated list of files to include (only these will be processed)     |
+| `--minify`        | `-m`  | Minify the output by removing all whitespace (spaces, tabs, and newlines)   |
 
 ## Contributing
 
@@ -116,8 +164,10 @@ Contributions are welcome! Please fork this repository and submit pull requests 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Acknowledgments
 
 Inspired by various open-source projects aimed at improving codebase understanding and analysis using LLMs.
+
+---
